@@ -122,6 +122,7 @@
 				total: 0,
 				page: 1,
 				listLoading: false,
+				keywordType:false,
 				sels: [],//列表选中列
 
 				editFormVisible: false,//编辑界面是否显示
@@ -166,7 +167,13 @@
 			},
 			handleCurrentChange(val) {
 				this.page = val;
-				this.getUsers();
+				console.log(val);
+				if(this.keywordType==true){
+					this.searchComm() ;
+				}else{
+					
+					this.getUsers();
+				}
 			},
 			//获取用户列表
 			getUsers() {
@@ -176,6 +183,7 @@
 				};
 				para=JSON.stringify(para)
 				this.listLoading = true;
+				this.keywordType= false;
 				NProgress.start();
 				getUserListPage(para).then((res) => {
 					console.log(res)
@@ -193,9 +201,9 @@
 				};
 				para=JSON.stringify(para)
 				this.listLoading = true;
+				this.keywordType=true;
 				NProgress.start();
 				searchCommodity(para).then((res) => {
-					console.log(res)
 					this.total =Number( res.data.data.total);
 					this.users = res.data.data.rows;
 					this.listLoading = false;

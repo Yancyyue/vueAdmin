@@ -39,13 +39,19 @@
 			<el-input type="textarea" v-model="form.desc"></el-input>
 		</el-form-item>
 		<el-form-item>
-			<el-button type="primary">立即创建</el-button>
+			<el-button type="primary" @click="onSubmit">立即创建</el-button>
 			<el-button @click.native.prevent>取消</el-button>
 		</el-form-item>
 	</el-form>
+	
 </template>
 
 <script>
+	import util from '../../common/js/util'
+	import NProgress from 'nprogress'
+	import {temFn, getUserListPage, removeUser, batchRemoveUser, editUser, addUser,searchCommodity } from '../../api/api';
+	import user from '../nav1/user'
+
 	export default {
 		data() {
 			return {
@@ -57,13 +63,54 @@
 					delivery: false,
 					type: [],
 					resource: '',
-					desc: ''
-				}
+					desc: '',
+					name2:[]
+				},
+				modelList:"",
+				groupout:"",
+				groupin:"",
+				outparam:"",
+				inparam:""
 			}
+		},
+		mounted(){
+			this.getUsers();
 		},
 		methods: {
 			onSubmit() {
-				console.log('submit!');
+				console.log(this.form);
+			},
+			getUsers() {
+				let para = {
+					page: this.page,
+					rows: '10'
+				};
+				let cid={
+					cId:"1279"
+				};
+				cid=JSON.stringify(cid);
+				para=JSON.stringify(para)
+				// this.listLoading = true;
+				// NProgress.start();
+				// this.keywordType= false;
+				// temFn(cid).then((res) =>{
+				// 	// console.log(res)
+				// 	NProgress.done();
+				// 	this.modelList=res.data.data.multiple;
+				// 	this.groupin=res.data.data.multiple.group_in.title;
+				// 	this.groupout=res.data.data.multiple.group_out.title;
+				// 	this.inparam=res.data.data.multiple.group_in.params;
+				// 	this.outparam=res.data.data.multiple.group_out.params;
+				// 	console.log(this.outparam)
+				// })
+				
+				// getUserListPage(para).then((res) => {
+				// 	console.log(res)
+				// 	this.total =Number( res.data.data.total);
+				// 	this.users = res.data.data.rows;
+				// 	this.listLoading = false;
+				// 	NProgress.done();
+				// });
 			}
 		}
 	}

@@ -110,7 +110,7 @@
 <script>
 	import util from '../../common/js/util'
 	import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser,searchCommodity } from '../../api/api';
+	import {temFn, getUserListPage, removeUser, batchRemoveUser, editUser, addUser,searchCommodity } from '../../api/api';
 
 	export default {
 		data() {
@@ -181,9 +181,16 @@
 					page: this.page,
 					rows: '10'
 				};
+				let cid={
+					cId:"1279"
+				};
+				cid=JSON.stringify(cid);
 				para=JSON.stringify(para)
 				this.listLoading = true;
 				this.keywordType= false;
+				// temFn(cid).then((res) =>{
+				// 	console.log(res)
+				// })
 				NProgress.start();
 				getUserListPage(para).then((res) => {
 					console.log(res)

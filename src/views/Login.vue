@@ -18,6 +18,7 @@
 <script>
   import { requestLogin } from '../api/api';
   import NProgress from 'nprogress'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -38,7 +39,13 @@
         },
         checked: true
       };
-    },
+    },  
+    computed: {  
+      ...mapGetters([  
+        'menuitems',  
+        'isLoadRoutes'  
+      ])  
+    }, 
     methods: {
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
@@ -59,9 +66,33 @@
                 userData=JSON.stringify(userData);
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
             sessionStorage.setItem('user', userData);
-            NProgress.done();
-            this.$router.push({ path: '/table' });
-
+            let routeOne={"routes":[
+               {
+                    "path": "/",
+                    "component":"Home",
+                    "name": "权限管理",
+                    "iconCls": "fa fa-shield",
+                    "children": [
+                        { "path": "/table", "component": "Table", "name": "角色列表"},
+                        { "path": "/form", "component": "Form", "name": "Form" },
+                        { "path": "/user", "component": "user", "name": "列表" }
+                    ]
+                }
+            ]}
+            routeOne=JSON.stringify(routeOne);
+            window.sessionStorage.setItem('route',routeOne)
+            console.log(this.menuitems)
+            this.addMenu(routeOne);
+            if (!this.isLoadRoutes) {
+                  this.$router.addRoutes(this.menuitems);
+                  for(let route of this.menuitems){
+                     this.$router.options.routes.push(route);
+                  }
+                  this.loadRoutes();
+            }
+            this.$router.push({ path: '/' });
+            // NProgress.done();
+            // this.$router.push({ path: '/main' });
             // requestLogin(loginParams).then(data => {
             //   this.logining = false;
             //   //NProgress.done();
@@ -82,7 +113,11 @@
             return false;
           }
         });
-      }
+      },
+      ...mapActions([  
+        'addMenu',  
+        'loadRoutes'  
+      ]) 
     }
   }
 

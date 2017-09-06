@@ -10,6 +10,8 @@ export const getUserList = params => { return instance.get(`${base}/user/list`, 
 
 export const getUserListPage = params => { return instance.post("http://192.168.0.102:8080/operation/mall/shop/item/list/all", params); };
 
+export const temFn= params => {return instance.post("http://192.168.0.102:8080/mall/operate/templet/templetInfo",params)};
+
 export const removeUser = params => { return instance.get(`${base}/user/remove`, { params: params }); };
 
 export const batchRemoveUser = params => { return instance.get(`${base}/user/batchremove`, { params: params }); };

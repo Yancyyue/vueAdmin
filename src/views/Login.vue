@@ -81,16 +81,15 @@
             ]}
             routeOne=JSON.stringify(routeOne);
             window.sessionStorage.setItem('route',routeOne)
-            console.log(this.menuitems)
             this.addMenu(routeOne);
-            if (!this.isLoadRoutes) {
+            if (this.isLoadRoutes==false) {
                   this.$router.addRoutes(this.menuitems);
                   for(let route of this.menuitems){
-                     this.$router.options.routes.push(route);
+                    this.$router.options.routes.push(route);
                   }
                   this.loadRoutes();
             }
-            this.$router.push({ path: '/' });
+            this.$router.push({ path: '/table' });
             // NProgress.done();
             // this.$router.push({ path: '/main' });
             // requestLogin(loginParams).then(data => {

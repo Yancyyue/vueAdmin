@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import store from './../vuex/store'
 	export default {
 		data() {
 			return {
@@ -117,7 +118,10 @@
 					type: 'warning'
 				}).then(() => {
 					sessionStorage.removeItem('user');
+					sessionStorage.removeItem('route');
 					_this.$router.push('/login');
+					store.getters.isLoadRoutes=true;
+					store.getters.menuitems=[];
 				}).catch(() => {
 
 				});

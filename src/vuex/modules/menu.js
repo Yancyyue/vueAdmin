@@ -17,10 +17,10 @@ export const mutations = {
       }  
     },  
     ADD_MENU:function (state, menuItems) {  
-      console.log(3)
       if (menuItems.length === 0) {  
         state.items = []  
       } else {  
+        state.items=[]
         generateMenuItems(state.items, menuItems)  
       }  
     },  
@@ -32,7 +32,6 @@ export const mutations = {
   function generateMenuItems(a,b){
     let routes=[];
     let addjson;
-    console.log(b)
     b=JSON.parse(b)
     
     for(let i=0;i<b.routes.length;i++){
@@ -57,5 +56,4 @@ export const mutations = {
       }
       a.push(addjson)
     }
-    console.log(a)
   }

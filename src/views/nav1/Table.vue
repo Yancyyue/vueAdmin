@@ -167,7 +167,6 @@
 			},
 			handleCurrentChange(val) {
 				this.page = val;
-				console.log(val);
 				if(this.keywordType==true){
 					this.searchComm() ;
 				}else{
@@ -193,7 +192,6 @@
 				// })
 				NProgress.start();
 				getUserListPage(para).then((res) => {
-					console.log(res)
 					this.total =Number( res.data.data.total);
 					this.users = res.data.data.rows;
 					this.listLoading = false;

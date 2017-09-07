@@ -29,24 +29,19 @@ import { mapActions, mapGetters } from 'vuex'
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
-console.log(store)
 //NProgress.configure({ showSpinner: false });
 let admin = JSON.parse(sessionStorage.getItem('user'));
 let adroute= sessionStorage.getItem('route');
 const router = new VueRouter({
   routes
 })
-console.log(store.menuitems)
 if(admin!==null&&adroute!==null){
   let routeLoad=adroute;
   store.commit('ADD_MENU', routeLoad);
-  console.log(1)
   router.addRoutes(store.getters.menuitems);
   for(let route of store.getters.menuitems){
      router.options.routes.push(route);
   }
-  console.log(store.mapActions)
-  
 }
 
 router.beforeEach((to, from, next) => {

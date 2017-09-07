@@ -7,7 +7,6 @@ import * as getters from './getters'
 import {mutations,state} from './modules/menu' 
   
 Vue.use(Vuex)  
-  console.log(mutations)
 const store = new Vuex.Store({ 
   strict: false,  
   state,
@@ -16,7 +15,6 @@ const store = new Vuex.Store({
   getters
   
 })  
-console.log(store)
 export default store  
 // import Vue from 'vue';
 // import Vuex from 'vuex';

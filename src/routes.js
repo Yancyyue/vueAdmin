@@ -40,7 +40,6 @@ let routes = [
    
 ];
 function generateRoutesFromMenu (menu = [], routes = []) {  
-    console.log(menu)
     for (let i = 0, l = menu.length; i < l; i++) {  
       let item = menu[i]  
       if (item.path) {  
